@@ -49,7 +49,7 @@ struct cdf_table *req_size_dist = NULL;
 unsigned int period_us; /* average request arrival interval (in microseconds) */
 
 /* per-request variables */
-unsigned int *req_size = NULL;  /* flow size (in bytes) */
+unsigned long long *req_size = NULL;  /* flow size (in bytes) */
 unsigned int *req_server_id = NULL; /* server ID */
 unsigned int *req_dscp = NULL;  /* DSCP of flow */
 unsigned int *req_rate = NULL;  /* sending rate of flow */
@@ -538,7 +538,7 @@ void read_config(char *file_name)
 void set_req_variables()
 {
     int i = 0;
-    unsigned long req_size_total = 0;
+    unsigned long long req_size_total = 0;
     unsigned long req_interval_total = 0;
     unsigned long rate_total = 0;
     double dscp_total = 0;
@@ -564,7 +564,7 @@ void set_req_variables()
         req_total_num = max((unsigned long)req_total_time * 1000000 / period_us, 1);
 
     /* request variables */
-    req_size = (unsigned int*)calloc(req_total_num, sizeof(unsigned int));
+    req_size = (unsigned long long*)calloc(req_total_num, sizeof(unsigned long long));
     req_server_id = (unsigned int*)calloc(req_total_num, sizeof(unsigned int));
     req_dscp = (unsigned int*)calloc(req_total_num, sizeof(unsigned int));
     req_rate = (unsigned int*)calloc(req_total_num, sizeof(unsigned int));

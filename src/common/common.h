@@ -8,7 +8,7 @@
 struct flow_metadata
 {
     unsigned int id;    /* ID */
-    unsigned int size;  /* flow size (bytes) */
+    unsigned long long size;  /* flow size (bytes) */
     unsigned int tos;   /* ToS value */
     unsigned int rate;  /* sending rate (Mbps) */
 };
