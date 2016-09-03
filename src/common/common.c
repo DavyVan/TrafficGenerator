@@ -79,10 +79,10 @@ unsigned int read_exact(int fd, char *buf, size_t count, size_t max_per_read, bo
  * Users can rate-limit the sending of traffic. If rate_mbps is equal to 0, it indicates no rate-limiting.
  * Users can also set ToS value for traffic.
  */
-unsigned int write_exact(int fd, char *buf, size_t count, size_t max_per_write,
+unsigned long long write_exact(int fd, char *buf, size_t count, size_t max_per_write,
     unsigned int rate_mbps, unsigned int tos, unsigned int sleep_overhead_us, bool dummy_buf)
 {
-    unsigned int bytes_total_write = 0; /* total number of bytes that have been written */
+    unsigned long long bytes_total_write = 0; /* total number of bytes that have been written */
     unsigned int bytes_to_write = 0;    /* maximum number of bytes to write in next send() call */
     char *cur_buf = NULL;   /* current location */
     int n;  /* number of bytes read in current read() call */
@@ -170,7 +170,7 @@ bool write_flow(int fd, struct flow_metadata *f, unsigned int sleep_overhead_us)
 {
     char *write_buf = NULL;  /* buffer to hold the real content of the flow */
     unsigned int max_per_write = 0;
-    unsigned int result = 0;
+    unsigned long long result = 0;
 
     if (!f)
         return false;
@@ -201,7 +201,7 @@ bool write_flow(int fd, struct flow_metadata *f, unsigned int sleep_overhead_us)
         return true;
     else
     {
-        printf("Error: write_exact() in write_flow() only successfully writes %u of %llu bytes.\n", result, f->size);
+        printf("Error: write_exact() in write_flow() only successfully writes %llu of %llu bytes.\n", result, f->size);
         return false;
     }
 }
