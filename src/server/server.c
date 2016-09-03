@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     /* initialize local server address */
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = INADDR_ANY;    
+    serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(server_port);
 
     /* initialize server socket */
@@ -148,7 +148,7 @@ void* handle_connection(void* ptr)
         }
 
         if (verbose_mode)
-            printf("Flow request: ID: %u Size: %u bytes ToS: %u Rate: %u Mbps\n", flow.id, flow.size, flow.tos, flow.rate);
+            printf("Flow request: ID: %u Size: %llu bytes ToS: %u Rate: %u Mbps\n", flow.id, flow.size, flow.tos, flow.rate);
 
         /* generate the flow response */
         if (!write_flow(sockfd, &flow, sleep_overhead_us))

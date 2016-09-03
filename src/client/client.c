@@ -601,7 +601,7 @@ void set_req_variables()
 
     printf("===========================================\n");
     printf("The average request arrival interval is %lu us\n", req_interval_total/req_total_num);
-    printf("The average request size is %lu bytes\n", req_size_total/req_total_num);
+    printf("The average request size is %llu bytes\n", req_size_total/req_total_num);
     printf("The average DSCP value is %.2f\n", dscp_total/req_total_num);
     printf("The average flow sending rate is %lu Mbps\n", rate_total/req_total_num);
     printf("The expected experiment duration is %lu s\n", req_interval_total/1000000);
@@ -818,7 +818,7 @@ void print_statistic()
             flow_goodput_mbps = 0;
 
         /* size (bytes), FCT(us), DSCP, sending rate (Mbps), goodput (Mbps) */
-        fprintf(fd, "%u %llu %u %u %u\n", req_size[i], fct_us, req_dscp[i], req_rate[i], flow_goodput_mbps);
+        fprintf(fd, "%llu %llu %u %u %u\n", req_size[i], fct_us, req_dscp[i], req_rate[i], flow_goodput_mbps);
     }
 
     fclose(fd);

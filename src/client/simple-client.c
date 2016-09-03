@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
         fct_us = (tv_end.tv_sec - tv_start.tv_sec) * 1000000 + (tv_end.tv_usec - tv_start.tv_usec);
         goodput_mbps = flow.size * 8 / fct_us;
 
-        printf("Flow: ID: %u\nSize: %u bytes ToS: %u Rate: %u Mbps\n", flow.id, flow.size, flow.tos, flow.rate);
+        printf("Flow: ID: %u\nSize: %llu bytes ToS: %u Rate: %u Mbps\n", flow.id, flow.size, flow.tos, flow.rate);
         printf("FCT: %u us Goodput: %u Mbps\n", fct_us, goodput_mbps);
     }
 
@@ -96,7 +96,7 @@ void print_usage(char *program)
     printf("Usage: %s [options]\n", program);
     printf("-s <sender>        IP address of sender (required)\n");
     printf("-p <port>          port number (default %d)\n", TG_SERVER_PORT);
-    printf("-n <bytes>         flow size in bytes (default %u)\n", flow.size);
+    printf("-n <bytes>         flow size in bytes (default %llu)\n", flow.size);
     printf("-q <tos>           Type of Service (ToS) value (default increased from %u)\n", flow.tos);
     printf("-c <count>         number of flows (default %u)\n", flow_number);
     printf("-r <rate (Mbps)>   sending rate of flows (default 0: no rate limiting)\n");
@@ -154,7 +154,7 @@ void read_args(int argc, char *argv[])
         {
             if (i+1 < argc)
             {
-                sscanf(argv[i+1], "%u", &(flow.size));
+                sscanf(argv[i+1], "%llu", &(flow.size));
                 i += 2;
             }
             /* cannot read flow size */

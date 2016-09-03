@@ -201,7 +201,7 @@ bool write_flow(int fd, struct flow_metadata *f, unsigned int sleep_overhead_us)
         return true;
     else
     {
-        printf("Error: write_exact() in write_flow() only successfully writes %u of %u bytes.\n", result, f->size);
+        printf("Error: write_exact() in write_flow() only successfully writes %u of %llu bytes.\n", result, f->size);
         return false;
     }
 }
