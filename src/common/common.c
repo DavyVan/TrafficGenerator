@@ -30,9 +30,9 @@ static char min_write_buf[TG_MIN_WRITE] = {0};
  * dummy_buf = false, and at least min{count, max_per_read} when
  * dummy_buf = true.
  */
-unsigned int read_exact(int fd, char *buf, size_t count, size_t max_per_read, bool dummy_buf)
+unsigned long long read_exact(int fd, char *buf, size_t count, size_t max_per_read, bool dummy_buf)
 {
-    unsigned int bytes_total_read = 0;  /* total number of bytes that have been read */
+    unsigned long long bytes_total_read = 0;  /* total number of bytes that have been read */
     unsigned int bytes_to_read = 0; /* maximum number of bytes to read in next read() call */
     char *cur_buf = NULL;   /* current location */
     int n;  /* number of bytes read in current read() call */
